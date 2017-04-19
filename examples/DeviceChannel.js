@@ -28,10 +28,18 @@ wsc.onopen = function(e){
 }
 wsc.onack = function(data, flags) {
 	console.log("ArtikWebSocket ack: ", data);
+	try {
+		wsc.sendMessage("ping");
+	} catch (e) {
+		console.error('Error sending ping frame: ' + e.toString());
+	}
 }
 wsc.onmessage = function(data,flags){
     console.log("ArtikWebSocket message: ",data);
 }
 wsc.onping = function(ts) {
 	console.log("ArtikWebSocket ping: " + ts);
+}
+wsc.onaction = function(data, flags) {
+	console.log("ArtikWebSocket action: ", data);
 }
